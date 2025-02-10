@@ -15,6 +15,8 @@
     nixosModules = {
       nvidia = import ./hardware/nvidia.nix;
       libvirt = import ./virtualization/libvirt.nix;
+      ceph = import ./storage/ceph.nix;
+      nfs = import ./storage/nfs.nix;
       zfs = import ./storage/zfs.nix;
     };
 
