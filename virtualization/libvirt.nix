@@ -7,6 +7,16 @@
     }).fd];
 in {
   options.custom.virtualisation.libvirt = {
+    enable = {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable libvirt on the host.";
+    };
+    addPkgs = {
+      type = lib.types.bool;
+      default = true;
+      description = "Add graphical support packages for VMs.";
+    };
     users = {
       type = lib.types.list;
       default = [];
@@ -20,7 +30,7 @@ in {
   };
 
   config = {
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; lib.optionals virtCfg.addPkgs [
       virt-viewer
       virt-manager
       tigervnc
