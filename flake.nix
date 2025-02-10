@@ -11,10 +11,11 @@
     };
   };
 
-  outputs = {self, nixpkgs, nix-devshells}: {
+  outputs = {nix-devshells, ...}: {
     nixosModules = {
       nvidia = import ./hardware/nvidia.nix;
       libvirt = import ./virtualization/libvirt.nix;
+      zfs = import ./storage/zfs.nix;
     };
 
     checks = nix-devshells.checks;
