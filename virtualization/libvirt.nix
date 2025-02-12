@@ -36,9 +36,10 @@ in {
       tigervnc
     ];
 
-    users.users = lib.attrsets.genAttrs virtCfg.users (_: {
-      extraGroups = ["KVM"];
-    });
+    users.users = lib.listToAttrs (map (user: {
+      name = user;
+      value = { extraGroups = [ "kvm" ]; };
+    }) virtCfg.users);
 
     virtualisation.libvirtd = {
       enable = true;
