@@ -18,7 +18,7 @@ in {
       description = "Add graphical support packages for VMs.";
     };
     users = {
-      type = lib.types.list;
+      type = lib.types.listOf lib.types.str;
       default = [];
       description = "List of users to add the `KVM` group to.";
     };
