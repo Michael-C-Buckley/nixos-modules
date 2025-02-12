@@ -7,22 +7,22 @@
     }).fd];
 in {
   options.custom.virtualisation.libvirt = {
-    enable = {
+    enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
       description = "Enable libvirt on the host.";
     };
-    addPkgs = {
+    addPkgs = lib.mkOption {
       type = lib.types.bool;
       default = true;
       description = "Add graphical support packages for VMs.";
     };
-    users = {
+    users = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
       description = "List of users to add the `KVM` group to.";
     };
-    bridge = {
+    bridge = lib.mkOption {
       type = lib.types.str;
       default = "br0";
       description = "Name of the bridge device to bind for Libvirt.";
