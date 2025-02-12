@@ -43,7 +43,7 @@ in {
 
     virtualisation.libvirtd = {
       enable = true;
-      allowedBridges = lib.mkDefault config.options.customer;
+      allowedBridges = lib.mkDefault virtCfg.bridge;
       parallelShutdown = 5;
       qemu = {
         package = pkgs.qemu_kvm;
