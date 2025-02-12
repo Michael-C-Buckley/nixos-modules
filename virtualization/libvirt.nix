@@ -22,9 +22,9 @@ in {
       default = [];
       description = "List of users to add the `KVM` group to.";
     };
-    bridge = lib.mkOption {
-      type = lib.types.str;
-      default = "br0";
+    bridges = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = ["br0"];
       description = "Name of the bridge device to bind for Libvirt.";
     };
   };
@@ -43,7 +43,7 @@ in {
 
     virtualisation.libvirtd = {
       enable = true;
-      allowedBridges = lib.mkDefault virtCfg.bridge;
+      allowedBridges = lib.mkDefault virtCfg.bridges;
       parallelShutdown = 5;
       qemu = {
         package = pkgs.qemu_kvm;
