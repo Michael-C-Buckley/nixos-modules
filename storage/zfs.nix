@@ -1,7 +1,7 @@
 {config, pkgs, lib, ...}: let
   inherit (lib) mkOption;
   inherit (lib.types) bool package;
-  cfg = config.custom.zfs;;
+  cfg = config.custom.zfs;
 in {
   options.custom.zfs = {
     enable = mkOption {
