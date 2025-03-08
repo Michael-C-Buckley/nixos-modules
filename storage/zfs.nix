@@ -1,15 +1,23 @@
-{config, pkgs, lib, ...}: {
-
+{config, pkgs, lib, ...}: let
+  inherit (lib) mkOption;
+  inherit (lib.types) bool package;
+  cfg = config.custom.zfs;;
+in {
   options.custom.zfs = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = mkOption {
+      type = bool;
       default = true;
       description = "Enable ZFS features on host.";
     };
-    encryption = lib.mkOption {
-      type = lib.types.bool;
+    encryption = mkOption {
+      type = bool;
       default = false;
       description = "Request decryption credentials on boot.";
+    };
+    package = mkOption {
+      type = package;
+      default = pkgs.zfs;
+      description = "The ZFS package to use.";
     };
   };
 
@@ -20,14 +28,11 @@
       zfs = {
         devNodes = "/dev/disk/by-partuuid";
         forceImportRoot = false;
-        requestEncryptionCredentials = config.custom.zfs.encryption;
+        requestEncryptionCredentials = cfg.encryption;
       };
     };
 
+    environment.systemPackages = [ cfg.package ];
     services.zfs.autoScrub.enable = true;
-
-    environment.systemPackages = with pkgs; [
-      zfs
-    ];
   };
 }
