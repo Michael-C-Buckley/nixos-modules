@@ -26,7 +26,6 @@ in {
       kernelModules = ["zfs"];
       supportedFilesystems = ["zfs"];
       zfs = {
-        devNodes = "/dev/disk/by-partuuid";
         forceImportRoot = false;
         requestEncryptionCredentials = cfg.encryption;
       };
