@@ -20,6 +20,8 @@
       nfs = import ./storage/nfs.nix;
       zfs = import ./storage/zfs.nix;
 
+      # Functions
+      address = import ./network/address.nix {};
       wireguard-interface = import ./network/wireguard-interface.nix {};
     };
 
