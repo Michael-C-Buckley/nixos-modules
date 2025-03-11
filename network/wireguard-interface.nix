@@ -9,7 +9,8 @@
   description = "WireGuard: ${name}";
   wantedBy = ["multi-user.target"];
   serviceConfig = {
-    Type = "simple";
+    Type = "oneshot";
+    RemainAfterExit = true;
 
     ExecStartPre = [
       "${pkgs.iproute2}/bin/ip link add dev ${name} type wireguard"
