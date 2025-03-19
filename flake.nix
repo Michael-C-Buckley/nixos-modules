@@ -14,6 +14,10 @@
   outputs = {nix-devshells, ...}: {
     nixosModules = {
       nvidia = import ./hardware/nvidia.nix;
+
+      # Virtualization
+      gns3 = import ./virtualization/gns3.nix;
+      incus = import ./virtualization/incus.nix;
       libvirt = import ./virtualization/libvirt.nix;
 
       ceph = import ./storage/ceph.nix;
